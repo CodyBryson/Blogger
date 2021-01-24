@@ -1,0 +1,41 @@
+@import "./_variables.scss";
+@import "bootstrap";
+@import "./_transitions.scss";
+@import "./_overrides.scss";
+
+:root {
+  --grey: #f6f6f6;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $body-bg;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  align-items: stretch;
+  // background-image:
+  // linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+  // url(https://images.unsplash.com/photo-1611318293929-6973206e3e4e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1353&q=80) !important;
+  // background-size: cover !important;
+  // background-repeat:no-repeat !important
+  
+}
+body{
+  background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1611318293929-6973206e3e4e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1353&q=80);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.navbar, header, footer{
+  background-color: transparent !important;
+}
+#app{
+  background-color: transparent !important;
+}
+
