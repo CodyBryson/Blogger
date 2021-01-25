@@ -141,7 +141,7 @@ export default {
 }
 .postContainer::-webkit-scrollbar{
   width: 0.7em;
-  background: transparent;
+
 }
 .modal-backdrop{
   z-index: -1000!important;

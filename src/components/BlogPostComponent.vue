@@ -2,14 +2,14 @@
   <div class="blog-container">
     <div class="blog-header">
       <div class="blog-author--no-cover">
-        <h3>Posted By:{{ blogPostProp.creator.name }}</h3>
+        <p>Posted By:<i>{{ blogPostProp.creator.name }}</i></p>
       </div>
     </div>
     <div class="blog-body">
-      <div class="blog-title">
-        <h1 class="customFont" :contenteditable="state.editPostBody" @blur="editPostBody">
-          "{{ blogPostProp.title }}"
-        </h1>
+      <div class="blog-title my-2">
+        <h4 class="customFont" :contenteditable="state.editPostBody" @blur="editPostBody">
+          <b>"{{ blogPostProp.title }}"</b>
+        </h4>
       </div>
       <div class="blog-footer">
         <ul>
