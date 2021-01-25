@@ -13,9 +13,14 @@ class BlogCommentService {
     console.log(res)
   }
 
-  async deleteBlogComment(commentId) {
-    const res = await api.delete('api/posts/' + commentId)
+  async editBlogComment(commentId, newBlogComment) {
+    const blogcommentData = { body: newBlogComment }
+    const res = await api.put('/api/comments' + commentId, blogcommentData)
     console.log(res)
+  }
+
+  async deleteBlogComment(commentId) {
+    await api.delete('api/comments/' + commentId)
   }
 }
 

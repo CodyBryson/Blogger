@@ -10,7 +10,7 @@
       <div class="blog-body">
         <div class="blog-title">
           <h1 class="customFont" :contenteditable="state.editPostTitle" @blur="editPostTitle">
-            <a href="#">{{ blog.title }}</a>
+            {{ blog.title }}
           </h1>
         </div>
         <div class="blog-summary">
@@ -25,37 +25,31 @@
           <li class="published-date">
             {{ blog.creator.createdAt }}
           </li>
-          <li class="comments">
-            <a href="#"><svg class="icon-bubble"><use xlink:href="#icon-bubble"></use></svg><span class="numero">8</span></a>
-          </li>
-          <li class="shares">
-            <a href="#"><svg class="icon-star"><use xlink:href="#icon-star"></use></svg><span class="numero">3</span></a>
-          </li>
         </ul>
         <button type="button" class="btn btn-outline-warning" v-if="state.account.id == blog.creatorId" @click="state.editPostTitle = !state.editPostTitle">
           Edit Title
         </button>
-        <button type="button" class="btn btn-outline-warning" v-if="state.account.id == blog.creatorId" @click="state.editPostBody = !state.editPostBody">
+        <button type="button" class="btn btn-outline-warning mx-2" v-if="state.account.id == blog.creatorId" @click="state.editPostBody = !state.editPostBody">
           Edit Body
         </button>
-        <button type="button" class="btn btn-outline-danger" v-if="state.account.id == blog.creatorId" @click="state.deleteBlogPost= !state.deleteBlogPost">
-          <b>Delete Blog Post</b>
+        <button type="button" class="btn btn-outline-danger ml-auto" v-if="state.account.id == blog.creatorId" @click="deleteBlogPost()">
+          Delete Blog Post
         </button>
       </div>
     </div>
     <!--Create Comment Form-->
-    <div class="row">
+    <div class="col-4">
       <form @submit.prevent="createBlogComment">
         <div class="form-group">
-          <label for="body"><h4 class="customFont">Create Comment</h4></label>
-          <textarea class="form-control" id="body" v-model="state.newblogComment.body" rows="6" placeholder="Body..."></textarea>
-          <button type="submit" class="btn btn-outline-success text-dark">
+          <label for="body"><h4 class="customFont text-light">Give Feedback!</h4></label>
+          <textarea class="form-control shadow" id="body" v-model="state.newblogComment.body" rows="6" placeholder="Feedback..."></textarea>
+          <button type="submit" class="btn btn-success text-light my-2">
             Submit
           </button>
         </div>
       </form>
     </div>
-    <div class="row justify-content-center">
+    <div class="col-4 justify-content-center">
       <BlogCommentComponent v-for="blogComment in state.blogComments" :key="blogComment.id" :blog-comment-prop="blogComment" />
     </div>
   </div>
@@ -63,7 +57,7 @@
 
 <script>
 import { computed, onMounted, reactive } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { blogPostService } from '../services/BlogPostService'
@@ -77,6 +71,7 @@ export default {
   },
   setup(props) {
     const route = useRoute()
+    const router = useRouter()
     const state = reactive({
       blogComments: computed(() => AppState.blogComments),
       newblogComment: { blog: route.params.id },
@@ -103,7 +98,6 @@ export default {
         logger.log('editing title', e.target.innerText)
         try {
           await blogPostService.editPostTitle(state.activeBlogPost.id, e.target.innerText)
-          await blogPostService.getOne(route.params.id)
         } catch (error) {
           logger.error(error)
         }
@@ -116,9 +110,12 @@ export default {
           logger.error(error)
         }
       },
+
       async deleteBlogPost() {
         try {
           await blogPostService.deleteBlogPost(state.activeBlogPost.id)
+          state.activeBlogPost = {}
+          router.push({ name: 'Home' })
         } catch (error) {
           logger.error(error)
         }
@@ -139,11 +136,16 @@ export default {
 
 <style lang="scss" scoped>
 .customFont{
-  font-family: 'Caveat', cursive;
+  font-family: 'Merriweather', serif;
+
 }
 body {
   background: #e5ded8;
   box-sizing: border-box;
+}
+.shadow{
+  border-radius: 5px;
+  box-shadow: hsla(0, 0, 0, .5) 0 8px 4px -2px
 }
 
 // Blog container

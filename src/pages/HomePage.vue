@@ -2,10 +2,13 @@
   <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
     <!-- TITLE -->
     <h1 class="display-1 text-center text-light customFont">
-      Bloggr
+      Chapters
     </h1>
+    <h2 class="text-center text-light customFont">
+      <i>A Blog of Short Stories</i>
+    </h2>
     <div v-if="state.user.isAuthenticated">
-      <button type="button" class="btn btn-outline-light customFont m-1" data-toggle="modal" data-target="#modelId">
+      <button type="button" class="btn btn-outline-light customFont my-2" data-toggle="modal" data-target="#modelId">
         <h5>
           New Blog Post
         </h5>
@@ -129,7 +132,8 @@ export default {
   }
 }
 .customFont{
-  font-family: 'Caveat', cursive;
+  font-family: 'Merriweather', serif;
+
 }
 .postContainer{
   max-height: 60vh;

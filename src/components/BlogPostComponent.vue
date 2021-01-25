@@ -2,13 +2,13 @@
   <div class="blog-container">
     <div class="blog-header">
       <div class="blog-author--no-cover">
-        <h3>{{ blogPostProp.creator.name }}</h3>
+        <h3>Posted By:{{ blogPostProp.creator.name }}</h3>
       </div>
     </div>
     <div class="blog-body">
       <div class="blog-title">
-        <h1 class="customFont">
-          <a href="#">{{ blogPostProp.title }}</a>
+        <h1 class="customFont" :contenteditable="state.editPostBody" @blur="editPostBody">
+          "{{ blogPostProp.title }}"
         </h1>
       </div>
       <div class="blog-footer">
@@ -60,7 +60,8 @@ export default {
 
 <style lang="scss" scoped>
 .customFont{
-  font-family: 'Caveat', cursive;
+  font-family: 'Merriweather', serif;
+
 }
   .card{
    background: #fff;
